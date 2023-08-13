@@ -1,0 +1,625 @@
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+* {
+  margin: 0;
+  padding: 0;
+  
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+/* Set core body defaults */
+body {
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/*  -----------------------------------------------RESET END--------------------------------------------------- */
+
+.container{
+  --max-width: 1110px;
+  --padding: 1rem;
+
+  width: min(var(--max-width), 100% - (var(--padding) * 2));
+  margin-inline: auto;
+}
+
+.widget{
+  margin-right: 5px;
+}
+
+.button-19 {
+  appearance: button;
+  background-color: #1899D6;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block; 
+  font-family: 'Poppins', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .8px;
+  line-height: 15px;
+  margin: 0;
+  outline: none;
+  overflow: visible;
+  padding: 10px 10px;
+  text-align: center;
+  text-transform: uppercase;
+  touch-action: manipulation;
+  transform: translateZ(0);
+  transition: filter .2s;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: 200px;
+  
+}
+
+.button-19:after {
+  background-clip: padding-box;
+  background-color: #1CB0F6;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  bottom: -4px;
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -1;
+}
+
+.button-19:main,
+.button-19:focus {
+  user-select: auto;
+}
+
+.button-19:hover:not(:disabled) {
+  filter: brightness(1.1);
+  -webkit-filter: brightness(1.1);
+}
+
+.button-19:disabled {
+  cursor: auto;
+} 
+
+
+
+------------------------------------------------------- Globals End -----------------------------------------------------
+
+
+.primary-header{
+  padding: 0.5em;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+
+}
+
+.primary-header .container{
+ /* display: flex;
+  justify-content: space-between;
+  gap: 3em; */
+}
+
+.primary-header .container .nav-wrapper{
+  display: flex;
+  justify-content: space-between;
+  gap: 3em; 
+}
+
+
+.primary-header .container .first-wrapper{
+  display: inline-flex;
+  align-items: center;
+  gap: 1em;
+}
+
+.primary-header .container .first-wrapper .signout{
+  display: none;
+}
+
+.nav-header{
+  display: none;
+}
+
+
+
+.primary-header .container .first-wrapper .logo{
+  padding-right: 7px;
+  border-right-style: solid;
+  border-right-width: 1.5px;
+  border-color: grey;
+  max-width: 60px;
+}
+
+.primary-header .container .first-wrapper .header{
+  font-family: 'Caveat', cursive;
+  /*font-size: 40px;*/
+  font-size: clamp(24px, 5vw, 40px);
+  white-space: nowrap;  
+  font-weight:700;
+  color: #8f5b07;
+  
+}
+
+.primary-header .container .second-wrapper{
+  display: inline-flex;
+  align-items:center;
+  
+}
+
+.primary-header .container .second-wrapper .nav-elements{
+  display: flex;
+  list-style: none;
+}
+
+.primary-header .container .second-wrapper .nav-elements .elements{
+  text-decoration: none;
+  margin-left: 50px;
+  font-weight: 700;
+  /*font-size: normal;*/
+  font-size: clamp(14px, 2vw, 18px);
+  white-space: nowrap;
+  padding: 7px;
+
+}
+
+.nav-elements li.elements:nth-child(4) {
+  /* Your styles for the third element here */
+  border-radius: 36px;
+  background-color: #8f5b07;
+  color: white;
+  /* Add any other styles you want */
+}
+
+.primary-header .container .third-wrapper{
+  display: flex;
+  align-items: center;
+}
+
+.cart-size{
+  font-size:(10px, 2vw, 20px);
+  font-weight: 700;
+  text-align: center;
+  color: rgb(244, 109, 109);
+}
+
+@media (max-width: 600px) {
+  .cart-size {
+    font-size: 12px;
+  }
+}
+
+.button-74 {
+  background-color: #fbeee0;
+  border: 2px solid #422800;
+  border-radius: 30px;
+  box-shadow: #422800 4px 4px 0 0;
+  color: #422800;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 15px; 
+  line-height: none;
+  
+  /*font-size: clamp(15px, 3vw, 15px); */
+  white-space: nowrap; 
+
+  padding: 0 10px;
+  line-height: 40px;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-74:hover {
+  background-color: #fff;
+}
+
+.button-74:active {
+  box-shadow: #422800 2px 2px 0 0;
+  transform: translate(2px, 2px);
+}
+
+
+
+@media (min-width: 768px) {
+  .button-74 {
+    min-width: 120px;
+    padding: 0 25px;
+  }
+}
+
+.inv-widget{
+  margin-left: 10px;
+
+}
+
+@media (max-width: 1000px){
+  .logo, .elements, .header{
+    display: none;
+  }
+
+  .primary-header .container .first-wrapper .signout{
+    display:block;
+    list-style: none;
+    display: flex;
+    gap: 1em;
+  }
+
+  .signout li{
+    font-size:small;
+    padding: 3px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .signout li:first-child {
+    /* Your styles for the first item here */
+    border-radius: 10px;
+    background-color: #b9770b;
+    color: white;
+    font-weight: bold;
+    
+    /* Add any other styles you want */
+}
+ 
+  .primary-header .container .nav-wrapper{
+    display: flex;
+    justify-content: space-between;
+    gap: 3em; 
+    
+  }
+
+  .nav-header{
+    text-align: center;
+    margin-left: 10%;
+  }
+  
+  .nav-header{
+    display: block;
+    font-family: 'Caveat', cursive;
+    /*font-size: 40px;*/
+    font-size: clamp(20px, 3vw, 30px);
+    white-space: nowrap;  
+    font-weight:700;
+    color: #8f5b07;
+
+  }
+
+  
+
+
+  .button-74 {
+    background-color: #f5c898;
+    border: 1.5px solid #422800;
+    border-radius: 30px;
+    box-shadow: #422800 1px 1px 0 0;
+    color: #422800;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 600;
+    font-size: 12px; 
+    line-height: none;
+    
+    /*font-size: clamp(15px, 3vw, 15px); */
+    white-space: nowrap; 
+  
+    padding: 0 20px;
+    line-height: 20px;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+
+
+
+
+
+
+
+    
+}
+
+
+
+/* -------------------------------------------------Nav Ends-----------------------------------------------------*/
+
+
+.hero-section{
+  background-color: #fbeee0;
+}
+
+.hero-section .container .even-collums{
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.even-collums > *{
+  flex-basis: 100%;
+}
+
+.hero-section .container .even-collums .first-hero-col{
+  line-height: 40px;
+  text-align: center;
+   margin-top: 8%;
+
+}
+
+.hero-section .container .even-collums .first-hero-col .sub-head{
+  font-weight: 600;
+  font-size: 15px;
+  
+}
+
+.hero-section .container .even-collums .first-hero-col .hero-header{
+  font-weight:800;
+  font-size: 50px;
+  line-height: 1.4em;
+}
+
+.hero-section .container .even-collums .first-hero-col .hero-header .light{
+  
+color: #8f5b07;
+font: italic bold Georgia, Serif;
+text-shadow: -5px 3px 0 #8f5b07, -14px 6px 0 #0a0e27;
+color: #eda839;
+background: none;
+}
+
+/* CSS to get Rid of font style */
+@media (max-width: 1200px){
+  .hero-section .container .even-collums .first-hero-col .hero-header .light{
+    color: #8f5b07;
+    font: italic bold Georgia, Serif;
+    text-shadow: -3px 3px 0 #8f5b07;
+    color: #eda839;
+    background: none;
+    }
+
+}
+
+.hero-burg{
+  color: #bb770a;
+}
+
+.hero-section .container .even-collums .second-hero-col .burg{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  
+}
+
+
+/* CSS for mobile devices */
+@media (max-width: 768px) {
+
+  .hero-section .container .even-collums{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+  }
+
+  .hero-section .container .even-collums .first-hero-col .sub-head{
+    font-weight: 600;
+    font-size: 13px;
+    
+  }
+  .hero-section .container .even-collums .first-hero-col .hero-header{
+    font-weight:800;
+    font-size: 40px;
+    line-height: 1.4em;
+  }
+
+}
+
+/* -------------------------------------------------Hero Ends-----------------------------------------------------*/
+
+.main-section {
+  margin-top: 8%;
+}
+
+.main-section .container .two-collums{
+  display: flex;
+  justify-content: space-around;
+  gap: 3em;
+}
+
+
+.two-collums > *:nth-child(1){
+  flex: 1 1 40%;
+}
+
+.two-collums > *:nth-child(2){
+  flex: 1 1 60%;
+} 
+
+.eating-chicken{
+  border-top-left-radius:5vw;
+  border-bottom-left-radius:5vw;
+  width: auto;
+
+}
+
+.main-section .container .two-collums .menu-options .options{
+  list-style: none;
+  padding-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 0.4em;
+  
+}
+
+.options > *{
+  flex: 1 1 33%;
+}
+
+
+.menu-options .text-block h4{
+  color: #6b4304;
+  font-weight: 600;
+}
+
+.menu-options .text-block h1{
+  color:#eda839;
+  font-weight:900;
+
+}
+
+.menu-options .text-block p{
+  font-weight: 300;
+}
+
+/* CSS for mobile devices */
+@media (max-width: 768px) {
+
+  .main-section {
+    margin-top: 8%;
+  }
+
+  .main-section .container{
+    
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px; 
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    
+  }
+
+  .main-section .container .two-collums{
+    display: flex;
+    flex-flow: row wrap;
+    gap: 3em;
+  }
+
+  .two-collums > *:nth-child(1){
+    flex: 1 1 10%;
+  }
+  
+  .two-collums > *:nth-child(2){
+    flex: 1 1 90%;
+  } 
+
+  .eating-chicken{
+    border-radius: 0%;
+    border-top-left-radius: 5vw;
+    border-top-right-radius: 5vw;
+  }
+
+  .main-section .container .two-collums .menu-options .text-block{
+    padding-left: 25px;
+  }
+
+  .main-section .container .two-collums .menu-options .options{
+   
+    text-align:center;
+    list-style: none;
+    padding-top: 1px;
+    display:flex;
+    flex-wrap: wrap;
+    row-gap: 0.3em;
+    
+  }
+
+ 
+  .options > *{
+    flex: 1 1 50%;
+  }
+
+  .button-19 {
+    appearance: button;
+    background-color: #1899D6;
+    border: solid transparent;
+    border-radius: 16px;
+    border-width: 0 0 4px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block; 
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .8px;
+    line-height: 13px;
+    margin: 0;
+    outline: none;
+    overflow: visible;
+    padding: 3px 3px;
+    text-align: center;
+    text-transform: uppercase;
+    touch-action: manipulation;
+    transform: translateZ(0);
+    transition: filter .2s;
+    user-select: none;
+    -webkit-user-select: none;
+    vertical-align: middle;
+    white-space: nowrap;
+    width: 150px;
+    
+  }
+ 
+
+
+  
+
+}

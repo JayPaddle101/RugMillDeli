@@ -23,6 +23,6 @@ app.set('view engine', 'ejs');
 
 // Routes 
 app.get('/', function (req, res) {
-  res.send('Hello World')
+  res.render("index")
 })
 
