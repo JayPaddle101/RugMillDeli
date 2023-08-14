@@ -140,6 +140,10 @@ svg {
   cursor: auto;
 } 
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
 
 
 ------------------------------------------------------- Globals End -----------------------------------------------------
@@ -217,6 +221,7 @@ svg {
   font-size: clamp(14px, 2vw, 18px);
   white-space: nowrap;
   padding: 7px;
+  cursor: pointer;
 
 }
 
@@ -310,6 +315,7 @@ svg {
     padding: 3px;
     padding-left: 8px;
     padding-right: 8px;
+    cursor: pointer;
   }
 
   .signout li:first-child {
