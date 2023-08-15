@@ -2,6 +2,8 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+
 
 const app = express()
 
@@ -14,7 +16,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true,})
 
 // middleware
 app.use(express.static('public'));
-app.use(express.json());
+app.use(bodyParser.json());
 app.use(cookieParser());
 
 
@@ -34,3 +36,12 @@ app.get('/signup', function (req, res) {
   res.render("signup")
 })
 
+app.post('/signup', (req, res) =>{
+  
+  const messageFromClient = req.body.message;
+  console.log('Received message from client:', messageFromClient);
+  
+  // You can send a response back to the client if needed
+  res.json({ received: true, message: 'Message received on server!' });
+
+})

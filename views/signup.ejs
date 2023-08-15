@@ -24,5 +24,44 @@
         <button>Sign Up</button>
     </form>
 
+
+
+<script>
+
+
+  const form = document.querySelector('form');
+  const email_error = document.querySelector('.email.error');
+  const password_error = document.querySelector('.password.error');
+
+  form.addEventListener('submit', async (e) =>{
+    e.preventDefault(); 
+
+    // get values
+    const email = form.email.value;
+    const password = form.password.value;
+   
+  try {
+  const res = await fetch('/signup', {
+    method: 'POST',
+    body: JSON.stringify({ message: 'Hello from client!' }),
+    headers: { 'Content-Type': 'application/json' }
+  });
+  
+  const data = await res.json();
+  console.log(data);
+  } catch (error) {
+  console.error('Error:', error);
+  }
+  
+ 
+
+
+
+  })
+
+
+
+</script>
+
 </body>
 </html>
