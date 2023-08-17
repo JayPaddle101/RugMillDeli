@@ -1,16 +1,21 @@
-// npm installs
+// npm installs or routes
 const express = require('express')
 const mongoose = require('mongoose')
+
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 
+const authRoutes = require('./routes/authRoutes');
 
+
+
+//Configure App
 const app = express()
 
 // database connection
 const dbURI = 'mongodb+srv://jrp329:Awesome101@rgm.bciueqx.mongodb.net/?retryWrites=true&w=majority';
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true,})
-.then((result) => app.listen(3000))
+.then((result) => app.listen(3000), console.log("Listening To Port 3000"))
 .catch((err) => console.log(err));
 
 
@@ -23,25 +28,10 @@ app.use(cookieParser());
 // view engine
 app.set('view engine', 'ejs');
 
+
 // Routes 
+app.use(authRoutes);
+
 app.get('/', function (req, res) {
   res.render("index")
-})
-
-app.get('/login', function (req, res) {
-  res.render("login")
-})
-
-app.get('/signup', function (req, res) {
-  res.render("signup")
-})
-
-app.post('/signup', (req, res) =>{
-  
-  const messageFromClient = req.body.message;
-  console.log('Received message from client:', messageFromClient);
-  
-  // You can send a response back to the client if needed
-  res.json({ received: true, message: 'Message received on server!' });
-
-})
+});

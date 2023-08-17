@@ -128,8 +128,8 @@ button{
 }
 
 .error{
-  color: #ff0099;
+  color: #f09321;
   margin: 10px 2px;
   font-size: 0.8em;
-  font-weight: bold;
+  font-weight: bolder;
 }
