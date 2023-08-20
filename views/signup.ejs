@@ -54,14 +54,16 @@
   
    const data = await res.json();
    console.log(data);
+
    if(data.error){
-    emailError.textContent = data.error.email;
-    passwordError.textContent = data.error.password;
+     emailError.textContent = data.error.email;
+     passwordError.textContent = data.error.password;
+   }
+   
+   if(data.user){
+    location.assign('/')
    }
 
-   if(data.user){
-    location.assign('/');
-   }
 
   } catch (error) {
    console.error('Error:', error);
