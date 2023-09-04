@@ -1,0 +1,271 @@
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+* {
+  margin: 0;
+  padding: 0;
+  
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+/* Set core body defaults */
+body {
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ----------------------------------------------- RESET END ----------------------------------------------- */
+
+body{
+  /*background-image: linear-gradient(to right, #fbeee0, #f2bf88);*/
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+.container{
+    --max-width: 1110px;
+    --padding: 1rem;
+  
+    width: min(var(--max-width), 100% - (var(--padding) * 2));
+    margin-inline: auto;
+}
+
+.button-47 {
+  align-items: center;
+  background: #FFFFFF;
+  border: 0 solid #E2E8F0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-sizing: border-box;
+  color: #1A202C;
+  display: inline-flex;
+  font-family: 'Poppins', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  height: 30px;
+  justify-content: center;
+  line-height: 10px;
+  overflow-wrap: break-word;
+  padding: 20px;
+  text-decoration: none;
+  width: auto;
+  border-radius: 30px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 200px;
+  background-color: #ebc076;
+}
+
+.widget{
+  margin-right: 5px;
+}
+
+.card:hover{
+  cursor: pointer;
+}
+
+
+/* ----------------------------------------------- UNIVERSAL END ------------------------------------------- */
+
+.first-section{
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+    background-color: white;
+  }
+  
+  .nav-header{
+    padding: 0.5em;
+  }
+  
+  .nav-header .container{
+    display: flex;
+    justify-content:center;
+    
+  }
+  
+  .nav-header .container .nav-list{
+    text-align:center;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items:center;
+    gap: 0.5em; 
+    column-gap: 0em;
+    padding-bottom: 10px;
+    
+  }
+
+  .nav-items  h3{
+    font-weight: bold;
+  }
+  
+  
+  .selected-food {
+    background-color: #f0c69a;
+    background-color: white;
+    border: 3px solid #f89c39;
+  }
+  
+  .nav-list > *{
+    flex: 1 1 33%;
+  }
+  
+  
+/* ----------------------------------------------- NAV ENDS ------------------------------------------------ */
+  
+  
+  .home{
+    padding: 10px;
+  }
+  
+  .home .container{
+    display: flex;
+    justify-content:center;
+  }
+  
+  .fa-house{
+    cursor: pointer;
+  }
+  
+  .home .container .cartandhome{
+    text-align:center;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items:center;
+    gap: 3em; 
+  }
+  
+  .my-cart {
+    cursor:pointer;
+    position: relative;
+    display: inline-block;
+  } 
+  
+  .cart-size{
+    font-size: medium;
+    font-weight: 700;
+    text-align: center;
+    position: absolute;
+    top: -8px;
+    right: -23px;
+    width: 23px;
+    height: 23px;
+    background-color: rgb(244, 109, 109);
+    border-radius: 50%;
+  }
+  
+  /*.my-cart::before {
+    content: "";
+    position: absolute;
+    top: -8px;
+    right: -20px;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border-radius: 50%;
+  }*/
+  
+/* ----------------------------------------------- CART ENDS ------------------------------------------------ */
+  
+  .main-section .container .wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 50px;
+    justify-content: center;
+    gap: 4em;
+  }
+
+  .card {
+   width: 250px;
+   background-color: rgb(248, 242, 238);
+   border-radius: 20px;
+   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+   display: flex;
+   flex-direction: column;
+   position: relative;
+  }
+
+  .circle {
+    width: 90px;
+    height: 90px;
+    background-color:rgb(246, 165, 98);
+    border-radius: 50%;
+    position: absolute;
+    top: -40px;
+    left: 32.5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+ }
+
+ .circle img {
+   max-width: 85%;
+   max-height: 85%;
+   border-radius: 50%;
+ }
+
+ .text {
+   padding: 30px;
+   text-align: center;
+   margin-top: 25px;
+   font-weight: 600;
+   height: 100px; /* Fixed height for text */
+ 
+  }
+

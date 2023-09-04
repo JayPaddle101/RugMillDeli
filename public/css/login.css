@@ -72,6 +72,11 @@ svg {
   margin-right: 10px;
 }
 
+a{
+  text-decoration: none; /* Removes underlines on links */
+  color: inherit;
+}
+
 h2{
   font-size: larger;
 }
@@ -132,4 +137,17 @@ button{
   margin: 10px 2px;
   font-size: 0.8em;
   font-weight: bolder;
+}
+
+.button-and-text {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.button-and-text h5{
+  color:#ea9d23;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-thickness: 2.5px;
 }

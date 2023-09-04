@@ -6,6 +6,10 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 
 const authRoutes = require('./routes/authRoutes');
+const foodRoutes = require('./routes/foodRoutes');
+const { requireAuth, checkUser } = require('./middleware/authMiddleware');
+
+
 
 
 
@@ -30,8 +34,15 @@ app.set('view engine', 'ejs');
 
 
 // Routes 
+app.get('*', checkUser);
+
 app.use(authRoutes);
+app.use(foodRoutes);
 
 app.get('/', function (req, res) {
   res.render("index")
 });
+
+
+
+

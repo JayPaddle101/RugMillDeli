@@ -31,9 +31,16 @@
       <div class="second-wrapper">
         <ul class="nav-elements">
            <li class="nav-header">Rug Mill Deli!</li>
+           <% if (user) { %>
+            <li class="elements"><i class="fa-solid fa-utensils widget"></i> Menu</li>
+            <li class="elements"><i class="fa-solid fa-wallet widget"></i> Orders </li>
+            <li class="elements"><a href="/logout"><i class="fa-solid fa-door-open widget"></i> Log Out</a></li>
+
+            <% } else  { %> 
            <li class="elements"><i class="fa-solid fa-utensils widget"></i> Menu</li>
-           <li class="elements"><a href="/login"><i class="fa-solid fa-right-to-bracket fa-sm widget"></i> Log In</a></li>
+           <li class="elements"><a href="/login"> Log In</a></li> 
            <li class="elements"><a href="/signup"><i class="fa-solid fa-address-card widget"></i> Sign Up</a></li>
+           <% } %>
         </ul>
       </div>
 
@@ -83,7 +90,7 @@
 
           <ul class="options">
 
-             <li class="food-items"><button class="button-19"><i class="fa-solid fa-egg"></i><h3>Breakfast</h3></button></li>
+             <li class="food-items"><button class="button-19"><a href="/breakfast"><i class="fa-solid fa-egg"></i><h3>Breakfast</h3></a></button></li>
              <li class="food-items"><button class="button-19"></i><i class="fa-solid fa-bread-slice"></i><h3>Cold Subs</h3></button></li>
              <li class="food-items"><button class="button-19"></i><i class="fa-solid fa-fire-flame-curved"></i><h3>Hot Subs</h3></button></li>
              <li class="food-items"><button class="button-19"></i><i class="fa-solid fa-plate-wheat"></i> <h3>Salads & Wraps</h3></button></li>
