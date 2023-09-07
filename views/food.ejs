@@ -20,31 +20,52 @@
 <div class="main-section">
     <div class="container">
         <div class="wrapper">
-            <div class="card">
-                <div class="circle">
-                    <img src="img/blt.jpg" alt="Image">
-                </div>
-                <div class="text">
-                    <p>BLT Sandwhich</p>
-                </div>
-            </div>
 
-            <div class="card">
-                <div class="circle">
-                    <img src="img/blt.jpg" alt="Image">
+            <% display_breakfast.forEach(sandwich => { %>
+                <div class="card" data-item-id="<%= sandwich._id %>" onclick="handleCardClick(this)">
+                    <div class="circle">
+                        <img src="img/<%= sandwich.image %>" alt="Image">
+                    </div>
+                    <div class="text">
+                        <p><%= sandwich.name %> Sandwich</p>   
+                    </div>
                 </div>
-                <div class="text">
-                    <p>Bacon Egg & Cheese Sandwhich</p>
-                </div>
-            </div>
+            <% }); %>
 
+           
 
         </div>
     </div>
 </div>
 
 
+ <script>
+    
+    async function handleCardClick(card){
+        const sandwichId = card.getAttribute('data-item-id');
+        console.log('Clicked card with sandwich ID:', sandwichId);
 
+        try {
+            const res = await fetch(`/sandwich-val/${sandwichId}`, {
+            method: 'GET'
+            });
+            const data = await res.json();
+            console.log(data);
+            
+
+        } catch (error) {
+            console.log("This Is the Error..." + error);
+        }
+         
+    }
+
+       
+
+
+
+       
+    
+ </script>
 
 
 

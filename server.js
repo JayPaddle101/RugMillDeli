@@ -11,8 +11,6 @@ const { requireAuth, checkUser } = require('./middleware/authMiddleware');
 
 
 
-
-
 //Configure App
 const app = express()
 
