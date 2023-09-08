@@ -1,6 +1,52 @@
 const mongoose = require('mongoose');
 
 
+const optionSchema = new mongoose.Schema({
+
+    name: {
+        type: String,
+        required: true,
+    },
+
+    image: {
+        type: String,
+    },
+
+    price: {
+        type: Number,
+        required: true,
+    },
+
+    less: {
+        type: Boolean,
+        default: false,
+    },
+
+    extra: {
+        type: Boolean,
+        default: false,
+    },
+
+    extra_price: {
+        type: Number,
+    },
+
+    default_option:{
+        type: Boolean
+    }
+
+});
+
+
+const customizationSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true,
+    },
+    options: [optionSchema],
+});
+
+
 const sandwichSchema = new mongoose.Schema({
    
     name: {
@@ -24,8 +70,9 @@ const sandwichSchema = new mongoose.Schema({
   
     image: {
         type: String,
-    }
+    },
 
+    customizations: [customizationSchema]
  
 })
 
