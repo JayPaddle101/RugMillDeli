@@ -1,0 +1,244 @@
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+* {
+  margin: 0;
+  padding: 0;
+  
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+/* Set core body defaults */
+body {
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/*  -----------------------------------------------RESET END--------------------------------------------------- */
+
+.container{
+  --max-width: 1110px;
+  --padding: 1rem;
+
+  width: min(var(--max-width), 100% - (var(--padding) * 2));
+  margin-inline: auto;
+}
+
+.card:hover{
+  cursor: pointer;
+}
+
+
+/*  -----------------------------------------------UNIVERSAL END--------------------------------------------- */
+
+.main-header{
+    padding: 20px;
+    
+}
+
+.main-header .container .text-content h1{
+    font-weight: 900;
+}
+
+.main-header .container .text-content i{
+    margin-right: 5px;
+    color: rgb(240, 164, 49);
+}
+
+.main-header .container .text-content p{
+    padding-top: 7px;
+    max-width: 700px;
+}
+
+
+.home{
+  padding: 10px;
+}
+
+.home .container{
+  display: flex;
+  justify-content:center;
+}
+
+.fa-house{
+  cursor: pointer;
+}
+
+.home .container .cartandhome{
+  text-align:center;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items:center;
+  gap: 3em; 
+}
+
+.my-cart {
+  position: relative;
+  display: inline-block;
+} 
+
+.cart-size{
+  font-size: medium;
+  font-weight: 700;
+  text-align: center;
+  position: absolute;
+  top: -8px;
+  right: -23px;
+  width: 23px;
+  height: 23px;
+  background-color: rgb(244, 109, 109);
+  border-radius: 50%;
+}
+
+.home_list{
+  padding-top: 15px;
+  display: flex;
+  list-style: none;
+  gap: 1.5em;
+  justify-content: center;
+  
+}
+
+.home_text{
+  position:relative;
+  display: inline-block;
+}
+
+.bubble{
+  text-align: center;
+  font-size: 15px;
+  font-weight: 700;
+  position: absolute;
+  top: -6px;
+  right: -19.5px;
+  width: 20px;
+  height: 20px;
+  background-color: rgb(244, 109, 109);
+  border-radius: 50%;
+}
+
+.fa-cart-shopping{
+  padding-right: 5px;
+}
+
+.home_text{
+  cursor: pointer;
+}
+
+
+/* ---------------------------------------------- Main header ends -------------------------------------------*/
+
+.food-label h3{
+  display: inline-block;
+  padding: 10px;
+  color: rgb(193, 133, 20);
+  font-weight: 900;
+  font-size: 27px;
+}
+
+.spacing{
+  padding-top: 30px;
+}
+
+.card-wrapper{ 
+  display: flex;
+  gap: 2.5em;
+  flex-wrap: wrap;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  max-width: 160px;
+  border-radius: 5px;
+  justify-content: center; /* Center contents vertically */
+  align-items: center; /* Center contents horizontally */
+  position: relative;
+  height: 250px; /* Adjust the height as needed */
+  border: 3px solid rgb(243, 154, 22);
+
+}
+
+/* Style for the card image */
+.card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.card-title{
+  font-size: 15px;
+}
+
+.card-description{
+  font-size: 13px;
+}
+
+/* Add spacing between the image and card content */
+.img-class {
+  margin-bottom: 20px; /* Adjust the margin as needed for spacing */
+}
+
+/* Style for the card content */
+.card-content {
+  text-align: center; /* Center text within the card content */
+  padding: 10px; /* Adjust the padding as needed for space within the card content */
+}
+
+
+
+
+

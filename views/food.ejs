@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Rug Mill Deli </title>
-    <link rel="stylesheet" href="css/food_options.css">
+    <link rel="stylesheet" href="/css/food_options.css">
     <script src="https://kit.fontawesome.com/093b934dd0.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -50,8 +50,18 @@
             method: 'GET'
             });
             const data = await res.json();
-            console.log(data);
-            
+           
+
+            if (data.isValid) {
+            // If the ID is valid
+            console.log('Valid sandwich ID:', sandwichId);
+            console.log('Sandwich Data:', data.sandwich);
+            window.location.href = `/customizations/${sandwichId}`;
+
+           } else{
+            // Handle the case where the ID is not valid.
+            console.error('Invalid sandwich ID:', sandwichId);
+           }
 
         } catch (error) {
             console.log("This Is the Error..." + error);

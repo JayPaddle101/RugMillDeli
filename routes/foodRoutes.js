@@ -6,6 +6,9 @@ const router = Router();
 
 router.get('/sandwich-val/:sandwichId', requireAuth, foodController.valSandwich);
 
+router.get('/customizations/:sandwichId', requireAuth, foodController.customize_get);
+
+
 router.get('/breakfast', requireAuth, foodController.breakfast_get);
 
 

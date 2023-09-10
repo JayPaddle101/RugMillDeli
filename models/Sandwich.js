@@ -43,6 +43,7 @@ const customizationSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    
     options: [optionSchema],
 });
 
@@ -63,6 +64,16 @@ const sandwichSchema = new mongoose.Schema({
         type: String,
     },
 
+    description: {
+        type: String,
+        required: true,
+    },
+
+    icon: {
+        type: String,
+        required: true,
+    },
+
     display: {
         type: Boolean,
         default: true,
@@ -75,6 +86,7 @@ const sandwichSchema = new mongoose.Schema({
     customizations: [customizationSchema]
  
 })
+
 
 
 sandwichSchema.statics.getDisplaySandwichs = async function(thiscategory) {

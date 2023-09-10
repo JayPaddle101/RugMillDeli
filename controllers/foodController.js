@@ -3,8 +3,7 @@ const Sandwich = require("../models/Sandwich");
 
 //validate Sandwich
 module.exports.valSandwich = async(req, res) =>{
-    const requestedId = req.params.sandwichId; //changed to not int
-
+    const requestedId = req.params.sandwichId;
      
     try {
         const selectedSandwich = await Sandwich.findById(requestedId);
@@ -21,25 +20,44 @@ module.exports.valSandwich = async(req, res) =>{
         res.status(500).json({ isValid: false, error: 'Internal server error' });
     }
     
-
 } 
 
 
 
+// controller actions
 
-
-// controller actions 
 module.exports.breakfast_get = async (req, res) =>{
     const selectedFood = "Breakfast"; // Use the same variable name here
    
     try {
      const display_breakfast = await Sandwich.getDisplaySandwichs(selectedFood); //Getting array of Sandwichs from db
-     console.log('Displayed BreakFast Sandwiches:');
-     console.log(display_breakfast);
+     //console.log('Displayed BreakFast Sandwiches:');
+     //console.log(display_breakfast);
      res.render("food", { selectedFood, display_breakfast }); // Pass Info
         
     } catch (error) {
         console.log(error);
     }
   
+}
+
+module.exports.customize_get = async (req,res) =>{
+
+    const requestedId = req.params.sandwichId;
+
+    try {
+        const sandwich = await Sandwich.findById(requestedId);
+    
+        if (sandwich) {
+            res.render("food_custom", { sandwich });
+        } else {
+            console.log("Could Not Find Sandwich");
+            res.status(404).send("Sandwich Not Found");
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        res.status(500).send("Internal Server Error");
+    }
+
+
 }
