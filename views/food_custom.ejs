@@ -97,66 +97,64 @@
 
 <script>
   
-  // Get all elements with the class "card"
- const cards = document.querySelectorAll('.card');
+  const containers = document.querySelectorAll('.container');
 
- // Loop through each card
- cards.forEach((card) => {
-  const buttons = card.querySelector(".buttons");
-  const cardContent = card.querySelector(".card-content");
-  const imgClass = card.querySelector(".img-class");
+  containers.forEach((container) => {
+    const cards = container.querySelectorAll('.card');
 
-  card.addEventListener("click", () => {
+    cards.forEach((card) => {
+      const buttons = card.querySelector(".buttons");
+      const cardContent = card.querySelector(".card-content");
+      const imgClass = card.querySelector(".img-class");
 
-    const isSelected = card.classList.contains("selected");
+      let isButtonVisible = !!buttons;
 
-    // Toggle the visibility of buttons, img-class, and hide other card content
-    if (buttons) {
-      if (buttons.style.display === "none" || buttons.style.display === "") {
-        buttons.style.display = "flex";
-        imgClass.style.display = "none";
-        cardContent.style.display = "none";
-      } else {
-        buttons.style.display = "none";
-        imgClass.style.display = "block";
-        cardContent.style.display = "block";
-      }
-    }
+      card.addEventListener("click", (event) => {
+        if (isButtonVisible) {
+          // Toggle the visibility of buttons, imgClass, and hide other card content
+          buttons.style.display = buttons.style.display === "none" || buttons.style.display === "" ? "flex" : "none";
+          imgClass.style.display = buttons.style.display === "none" ? "block" : "none";
+          cardContent.style.display = buttons.style.display === "none" ? "block" : "none";
+        }
 
-    // Toggle the "selected" class on the card only if it doesn't have it
-    if (!isSelected) {
-    card.classList.toggle("selected");
-    }
+        // Toggle the "selected" class on the clicked card without affecting other cards
+        card.classList.toggle("selected");
 
-   });
- });
+        // Add or remove the "selected" class from all cards in the same container except the clicked one
+        cards.forEach((containerCard) => {
+          if (containerCard !== card) {
+            containerCard.classList.remove("selected");
+            const containerButtons = containerCard.querySelector(".buttons");
+            const containerImgClass = containerCard.querySelector(".img-class");
+            const containerCardContent = containerCard.querySelector(".card-content");
+            if (containerButtons) {
+              containerButtons.style.display = "none";
+              containerImgClass.style.display = "block";
+              containerCardContent.style.display = "block";
+            }
+          }
+        });
+      });
 
+      const options = card.querySelectorAll(".buttons button");
 
-  const options = document.querySelectorAll(".buttons button");
+      options.forEach((button) => {
+        button.addEventListener("click", (event) => {
+          event.stopPropagation();
 
-  options.forEach((button) => {
-    button.addEventListener("click", (event) => {
-    event.stopPropagation();
+          // Remove the "active" class from all buttons within the same card
+          options.forEach((btn) => btn.classList.remove("active"));
 
-    // Remove the "active" class from all buttons
-    options.forEach((btn) => btn.classList.remove("active"));
+          // Add the "active" class to the clicked button
+          button.classList.add("active");
 
-    // Add the "active" class to the clicked button
-    button.classList.add("active");
-
-    // Hide buttons, show imgClass, and cardContent
-    const card = button.closest(".card");
-    const buttons = card.querySelector(".buttons");
-    const imgClass = card.querySelector(".img-class");
-    const cardContent = card.querySelector(".card-content");
-
-    if (buttons) {
-      buttons.style.display = "none";
-      imgClass.style.display = "block";
-      cardContent.style.display = "block";
-    }
-    
-   });
+          // Hide buttons, show imgClass, and cardContent
+          buttons.style.display = "none";
+          imgClass.style.display = "block";
+          cardContent.style.display = "block";
+        });
+      });
+    });
   });
 
 

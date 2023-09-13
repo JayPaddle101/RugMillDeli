@@ -10,7 +10,6 @@ const foodRoutes = require('./routes/foodRoutes');
 const { requireAuth, checkUser } = require('./middleware/authMiddleware');
 
 
-
 //Configure App
 const app = express()
 
