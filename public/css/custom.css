@@ -208,8 +208,12 @@ svg {
   align-items: center; /* Center contents horizontally */
   position: relative;
   height: 250px; /* Adjust the height as needed */
-  border: 3px solid rgb(243, 154, 22);
+  transition: all 0.3s ease; /* Add transition for smooth effect */
 
+}
+
+.selected{
+  border: 3px solid rgb(243, 154, 22);
 }
 
 /* Style for the card image */
@@ -237,6 +241,46 @@ svg {
   text-align: center; /* Center text within the card content */
   padding: 10px; /* Adjust the padding as needed for space within the card content */
 }
+
+/* Apply the glass effect on hover */
+.card:hover {
+  background-color: rgba(255, 255, 255, 0.9); /* Increase opacity on hover */
+  transform: translateY(-5px); /* Move the card up slightly on hover */
+}
+
+
+.buttons {
+  width: 160px;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.buttons button {
+  width: 130px;
+  margin: 5px;
+  padding: 10px 20px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* Add this CSS to style the active button */
+.buttons button.active {
+  background-color: rgba(255, 255, 255, 0.7); /* Change the background color when active */
+  border: 3px solid rgb(243, 154, 22); /* Change the border color when active */
+  color: rgb(243, 154, 22); /* Change the text color when active */
+  background-color: blanchedalmond;
+  font-weight: bold;
+}
+
+
+
+
+
 
 
 

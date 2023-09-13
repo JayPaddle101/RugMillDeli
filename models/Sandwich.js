@@ -17,6 +17,10 @@ const optionSchema = new mongoose.Schema({
         required: true,
     },
 
+    extra_options: {
+        type: Boolean,
+    },
+
     less: {
         type: Boolean,
         default: false,

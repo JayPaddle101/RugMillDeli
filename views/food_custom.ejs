@@ -32,38 +32,135 @@
   </div>
 
 
-<div class="container">
-   <div class="spacing">
+  <% sandwich.customizations.forEach((customization) => { %>
+    <div class="container">
+      <div class="spacing">
+        <div class="food-label" data-label-id="<%= customization._id %>" data-item-id="<%= sandwich._id %>">
+          <h3><%= customization.name %></h3>
+        </div>
+        <div class="card-wrapper">
+          <% customization.options.forEach((option) => { %>
+            <div class="card <%= option.default_option ? 'selected' : '' %>" data-card-id="<%= option._id %>" data-item-id="<%= sandwich._id %>">
+              <div class="img-class">
+                <img src="/img/<%= option.image %>" alt="Card Image">
+              </div>
+              <div class="card-content">
+                <h2 class="card-title"><%= option.name %></h2>
+                <p class="card-description">+$<%= option.price %></p>
+              </div>
+              
+              <% if (option.extra_options) { %>
+                <div class="buttons">
+                  <button>Less</button>
+                  <button>Regular</button>
+                  <button>Extra (+$<%= option.extra_price %>)</button>
+                </div>
+              <% } %>
+            </div>
+          <% }) %>
+        </div>
+      </div>
+    </div>
+  <% }) %>
 
-    <div class="food-label" data-label-id="" data-item-id="">
-      <h3>Bread</h3>
+
+  <!--<div class="container">
+    <div class="spacing">
+ 
+     <div class="food-label">
+       <h3>Bread</h3>
+     </div>
+ 
+    <div class="card-wrapper">
+    <div class="card" id="myCard">
+ 
+     <div class="img-class">
+       <img src="/img/white_shadow.png" alt="Card Image">
+     </div>
+   
+     <div class="card-content">
+       <h2 class="card-title">White Bread</h2>
+       <p class="card-description">+$0.50</p>
+     </div>
+
+     <div class="buttons" style="display: none;">
+      <button>Less</button>
+      <button>Regular</button>
+      <button >Extra (+$1.00)</button>
     </div>
 
-   <div class="card-wrapper">
-   <div class="card" data-card-id="" data-item-id="">
-
-    <div class="img-class">
-      <img src="/img/white_shadow.png" alt="Card Image">
-    </div>
-  
-    <div class="card-content">
-      <h2 class="card-title">White Bread</h2>
-      <p class="card-description">+$0.50</p>
     </div>
    </div>
-
   </div>
- </div>
-</div>
+ </div>  -->
 
 
+<script>
+  
+  // Get all elements with the class "card"
+ const cards = document.querySelectorAll('.card');
+
+ // Loop through each card
+ cards.forEach((card) => {
+  const buttons = card.querySelector(".buttons");
+  const cardContent = card.querySelector(".card-content");
+  const imgClass = card.querySelector(".img-class");
+
+  card.addEventListener("click", () => {
+
+    const isSelected = card.classList.contains("selected");
+
+    // Toggle the visibility of buttons, img-class, and hide other card content
+    if (buttons) {
+      if (buttons.style.display === "none" || buttons.style.display === "") {
+        buttons.style.display = "flex";
+        imgClass.style.display = "none";
+        cardContent.style.display = "none";
+      } else {
+        buttons.style.display = "none";
+        imgClass.style.display = "block";
+        cardContent.style.display = "block";
+      }
+    }
+
+    // Toggle the "selected" class on the card only if it doesn't have it
+    if (!isSelected) {
+    card.classList.toggle("selected");
+    }
+
+   });
+ });
 
 
+  const options = document.querySelectorAll(".buttons button");
+
+  options.forEach((button) => {
+    button.addEventListener("click", (event) => {
+    event.stopPropagation();
+
+    // Remove the "active" class from all buttons
+    options.forEach((btn) => btn.classList.remove("active"));
+
+    // Add the "active" class to the clicked button
+    button.classList.add("active");
+
+    // Hide buttons, show imgClass, and cardContent
+    const card = button.closest(".card");
+    const buttons = card.querySelector(".buttons");
+    const imgClass = card.querySelector(".img-class");
+    const cardContent = card.querySelector(".card-content");
+
+    if (buttons) {
+      buttons.style.display = "none";
+      imgClass.style.display = "block";
+      cardContent.style.display = "block";
+    }
+    
+   });
+  });
 
 
-
-
-
+</script>
 
 
 
