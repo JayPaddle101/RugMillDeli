@@ -99,63 +99,72 @@
   
   const containers = document.querySelectorAll('.container');
 
-  containers.forEach((container) => {
-    const cards = container.querySelectorAll('.card');
+containers.forEach((container) => {
+  const cards = container.querySelectorAll('.card');
 
-    cards.forEach((card) => {
-      const buttons = card.querySelector(".buttons");
-      const cardContent = card.querySelector(".card-content");
-      const imgClass = card.querySelector(".img-class");
+  cards.forEach((card) => {
+    const buttons = card.querySelector(".buttons");
+    const cardContent = card.querySelector(".card-content");
+    const imgClass = card.querySelector(".img-class");
 
-      let isButtonVisible = !!buttons;
+    let isButtonVisible = !!buttons;
 
-      card.addEventListener("click", (event) => {
-        if (isButtonVisible) {
-          // Toggle the visibility of buttons, imgClass, and hide other card content
-          buttons.style.display = buttons.style.display === "none" || buttons.style.display === "" ? "flex" : "none";
-          imgClass.style.display = buttons.style.display === "none" ? "block" : "none";
-          cardContent.style.display = buttons.style.display === "none" ? "block" : "none";
-        }
+    card.addEventListener("click", (event) => {
+      if (isButtonVisible) {
+        // Toggle the visibility of buttons, imgClass, and hide other card content
+        buttons.style.display = buttons.style.display === "none" || buttons.style.display === "" ? "flex" : "none";
+        imgClass.style.display = buttons.style.display === "none" ? "block" : "none";
+        cardContent.style.display = buttons.style.display === "none" ? "block" : "none";
+      }
 
-        // Toggle the "selected" class on the clicked card without affecting other cards
-        card.classList.toggle("selected");
+      // Check if the card is already selected
+      const isSelected = card.classList.contains("selected");
 
-        // Add or remove the "selected" class from all cards in the same container except the clicked one
-        cards.forEach((containerCard) => {
-          if (containerCard !== card) {
-            containerCard.classList.remove("selected");
-            const containerButtons = containerCard.querySelector(".buttons");
-            const containerImgClass = containerCard.querySelector(".img-class");
-            const containerCardContent = containerCard.querySelector(".card-content");
-            if (containerButtons) {
-              containerButtons.style.display = "none";
-              containerImgClass.style.display = "block";
-              containerCardContent.style.display = "block";
-            }
+      // Toggle the "selected" class on the clicked card
+      card.classList.toggle("selected");
+
+      if (isSelected) {
+        // If the card was already selected, prevent it from deselecting itself
+        card.classList.add("selected");
+      }
+
+      // Remove the "selected" class from all other cards in the same container
+      cards.forEach((containerCard) => {
+        if (containerCard !== card) {
+          containerCard.classList.remove("selected");
+          const containerButtons = containerCard.querySelector(".buttons");
+          const containerImgClass = containerCard.querySelector(".img-class");
+          const containerCardContent = containerCard.querySelector(".card-content");
+          if (containerButtons) {
+            containerButtons.style.display = "none";
+            containerImgClass.style.display = "block";
+            containerCardContent.style.display = "block";
           }
-        });
+        }
       });
+    });
 
-      const options = card.querySelectorAll(".buttons button");
+    const options = card.querySelectorAll(".buttons button");
 
-      options.forEach((button) => {
-        button.addEventListener("click", (event) => {
-          event.stopPropagation();
+    options.forEach((button) => {
+      button.addEventListener("click", (event) => {
+        event.stopPropagation();
 
-          // Remove the "active" class from all buttons within the same card
-          options.forEach((btn) => btn.classList.remove("active"));
+        // Remove the "active" class from all buttons within the same card
+        options.forEach((btn) => btn.classList.remove("active"));
 
-          // Add the "active" class to the clicked button
-          button.classList.add("active");
+        // Add the "active" class to the clicked button
+        button.classList.add("active");
 
-          // Hide buttons, show imgClass, and cardContent
-          buttons.style.display = "none";
-          imgClass.style.display = "block";
-          cardContent.style.display = "block";
-        });
+        // Hide buttons, show imgClass, and cardContent
+        buttons.style.display = "none";
+        imgClass.style.display = "block";
+        cardContent.style.display = "block";
       });
     });
   });
+});
+
 
 
 </script>

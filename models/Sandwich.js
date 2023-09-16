@@ -47,6 +47,10 @@ const customizationSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+
+    multi_card: {
+        type: Boolean,
+    },
     
     options: [optionSchema],
 });

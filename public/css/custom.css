@@ -256,6 +256,7 @@ svg {
   align-items: center;
   justify-content: center;
   text-align: center;
+  
 }
 
 .buttons button {
@@ -265,11 +266,12 @@ svg {
   border-radius: 20px;
   cursor: pointer;
   white-space: nowrap;
+  background-color: rgb(255, 255, 255);
 }
 
 /* Add this CSS to style the active button */
 .buttons button.active {
-  background-color: rgba(255, 255, 255, 0.7); /* Change the background color when active */
+  background-color: rgba(243, 226, 226, 0.7); /* Change the background color when active */
   border: 3px solid rgb(243, 154, 22); /* Change the border color when active */
   color: rgb(243, 154, 22); /* Change the text color when active */
   background-color: blanchedalmond;
