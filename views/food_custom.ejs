@@ -33,7 +33,7 @@
 
 
   <% sandwich.customizations.forEach((customization) => { %>
-    <div class="container">
+    <div class="container" data-multi-card="<%= customization.multi_card %>">
       <div class="spacing">
         <div class="food-label" data-label-id="<%= customization._id %>" data-item-id="<%= sandwich._id %>">
           <h3><%= customization.name %></h3>
@@ -120,28 +120,30 @@ containers.forEach((container) => {
       // Check if the card is already selected
       const isSelected = card.classList.contains("selected");
 
-      // Toggle the "selected" class on the clicked card
-      card.classList.toggle("selected");
+      // Check if the container allows multi-card selection
+      const isMultiCardContainer = container.dataset.multiCard === "true";
 
-      if (isSelected) {
-        // If the card was already selected, prevent it from deselecting itself
-        card.classList.add("selected");
+      // If it's a multi-card container or the card is not already selected, toggle the "selected" class
+      if (isMultiCardContainer || !isSelected) {
+        card.classList.toggle("selected");
       }
 
-      // Remove the "selected" class from all other cards in the same container
-      cards.forEach((containerCard) => {
-        if (containerCard !== card) {
-          containerCard.classList.remove("selected");
-          const containerButtons = containerCard.querySelector(".buttons");
-          const containerImgClass = containerCard.querySelector(".img-class");
-          const containerCardContent = containerCard.querySelector(".card-content");
-          if (containerButtons) {
-            containerButtons.style.display = "none";
-            containerImgClass.style.display = "block";
-            containerCardContent.style.display = "block";
+      // Remove the "selected" class from all other cards in the same container if it's not a multi-card container
+      if (!isMultiCardContainer) {
+        cards.forEach((containerCard) => {
+          if (containerCard !== card) {
+            containerCard.classList.remove("selected");
+            const containerButtons = containerCard.querySelector(".buttons");
+            const containerImgClass = containerCard.querySelector(".img-class");
+            const containerCardContent = containerCard.querySelector(".card-content");
+            if (containerButtons) {
+              containerButtons.style.display = "none";
+              containerImgClass.style.display = "block";
+              containerCardContent.style.display = "block";
+            }
           }
-        }
-      });
+        });
+      }
     });
 
     const options = card.querySelectorAll(".buttons button");
