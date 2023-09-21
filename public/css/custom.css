@@ -278,6 +278,144 @@ svg {
   font-weight: bold;
 }
 
+/* ---------------------------------------------- Selector ends -------------------------------------------------*/
+
+.footer-box {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  background-color: white;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999; /* Set a higher z-index value */
+  padding: 15px;
+}
+
+.footer-wrapper{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-side h4{
+  padding-bottom: 5px;
+  font-weight: 500;
+}
+
+.footer-side h6{
+  padding-bottom: 5px;
+  font-weight: 300;
+}
+
+.add-cart{
+  display: flex;
+  align-items: center;
+  gap: 1.5em;
+}
+
+.counter-box{
+  border: 1px solid #298e46;
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+  box-sizing: border-box;
+  color: #fff;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 40px;
+  padding: 5px 30px;
+  position: relative;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.counter{
+  color: #298e46;
+  padding: 20px;
+  font-size: larger;
+}
+
+.count-btn{
+  appearance: none;
+  border: none;
+  background: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 22px;
+  color: #059511;
+}
+
+.Dynamic-Price{
+  display: inline;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.Dynamic-Ingredient{
+  max-width: 650px;
+}
+
+.price{
+  display: none;
+}
+
+
+.content{
+  margin-bottom: 100px;
+  padding-bottom: 125px; /* Add padding equal to the height of the black box */
+}
+
+
+/* CSS */
+.add_to_cart {
+  appearance: none;
+  background-color:#298e46;
+  border: 1px solid rgba(27, 31, 35, .15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 40px;
+  padding: 5px 50px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+/* Media query for screens with a width of 652px or lower */
+@media (max-width: 652px) {
+  .footer-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .information {
+    margin-bottom: 10px;
+  }
+
+  .add-cart {
+    width: 100%;
+  }
+
+  .counter-box{
+    width: 70%;
+  }
+
+  .cart_button{
+    width: 100%;
+  }
+}
+
 
 
 

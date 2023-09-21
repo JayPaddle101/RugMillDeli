@@ -17,6 +17,10 @@ const optionSchema = new mongoose.Schema({
         required: true,
     },
 
+    display_price:{
+        type: Boolean,
+    },
+
     extra_options: {
         type: Boolean,
     },
@@ -70,6 +74,7 @@ const sandwichSchema = new mongoose.Schema({
 
     category: {
         type: String,
+        required: true,
     },
 
     description: {

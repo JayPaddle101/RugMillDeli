@@ -1,5 +1,5 @@
 const Sandwich = require("../models/Sandwich");
-
+const UserSandwich = require("../models/userSandwich");
 
 //validate Sandwich
 module.exports.valSandwich = async(req, res) =>{
@@ -41,6 +41,7 @@ module.exports.breakfast_get = async (req, res) =>{
   
 }
 
+
 module.exports.customize_get = async (req,res) =>{
 
     const requestedId = req.params.sandwichId;
@@ -49,11 +50,29 @@ module.exports.customize_get = async (req,res) =>{
         const sandwich = await Sandwich.findById(requestedId);
     
         if (sandwich) {
-            res.render("food_custom", { sandwich });
+
+            const userSandwich = new UserSandwich({
+                name: sandwich.name,
+                base_price: sandwich.base_price,
+                actual_price:0.00,
+                category: sandwich.category,
+                image: sandwich.image,
+                quantity: 1,
+                customizations: [],
+                submitted: false, // Set it to false by default
+            });
+
+            // Save the userSandwich document to the database
+            //await userSandwich.save();
+            
+
+            res.render("food_custom", { sandwich, userSandwich });
+            
         } else {
             console.log("Could Not Find Sandwich");
             res.status(404).send("Sandwich Not Found");
         }
+
     } catch (error) {
         console.error("Error:", error);
         res.status(500).send("Internal Server Error");
