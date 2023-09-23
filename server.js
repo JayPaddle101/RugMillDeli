@@ -7,6 +7,8 @@ const bodyParser = require('body-parser');
 
 const authRoutes = require('./routes/authRoutes');
 const foodRoutes = require('./routes/foodRoutes');
+const userfoodRoutes = require('./routes/userfoodRoutes');
+
 const { requireAuth, checkUser } = require('./middleware/authMiddleware');
 
 
@@ -35,6 +37,7 @@ app.get('*', checkUser);
 
 app.use(authRoutes);
 app.use(foodRoutes);
+app.use(userfoodRoutes);
 
 app.get('/', function (req, res) {
   res.render("index")

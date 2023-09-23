@@ -21,20 +21,15 @@ const optionSchema = new mongoose.Schema({
         type: Boolean,
     },
 
+    show_display_price:{
+        type: Number
+    },
+
     extra_options: {
         type: Boolean,
     },
 
-    less: {
-        type: Boolean,
-        default: false,
-    },
-
-    extra: {
-        type: Boolean,
-        default: false,
-    },
-
+  
     extra_price: {
         type: Number,
     },
@@ -53,6 +48,10 @@ const customizationSchema = new mongoose.Schema({
     },
 
     multi_card: {
+        type: Boolean,
+    },
+
+    raw_card: {
         type: Boolean,
     },
     
@@ -101,6 +100,37 @@ const sandwichSchema = new mongoose.Schema({
 })
 
 
+sandwichSchema.statics.validateItems = async function (selectedItems) {
+
+    try {
+
+      for (const selectedItem of selectedItems) {
+        const { cardId , itemId } = selectedItem;
+  
+        // Check if cardId and itemId are valid mongoose ObjectId
+        if (!mongoose.Types.ObjectId.isValid(cardId) || !mongoose.Types.ObjectId.isValid(itemId)) {
+          return { valid: false, message: 'Invalid ID in selected items' };
+        }
+
+        // Perform any additional validation or processing here
+        // For example, you can fetch the corresponding Sandwich document
+        const sandwich = await this.findById(itemId);
+        //const ing = await this.findById(cardId);
+        //console.log(ing);
+  
+        if (!sandwich) {
+          return { valid: false, message: 'Sandwich not found for itemId ' + itemId };
+        }
+      }
+        
+      // If all selected items are valid
+      return { valid: true, message: 'Selected items are valid' };
+
+    } catch (error) {
+      console.error('Error:', error);
+      return { valid: false, message: 'Internal server error' };
+    }
+};
 
 sandwichSchema.statics.getDisplaySandwichs = async function(thiscategory) {
     try {

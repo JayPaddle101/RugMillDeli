@@ -66,7 +66,7 @@
 
 
   <% sandwich.customizations.forEach((customization) => { %>
-    <div class="container" data-multi-card="<%= customization.multi_card %>">
+    <div class="container" data-multi-card="<%= customization.multi_card %>"  data-raw-card="<%= customization.raw_card %>">
       <div class="spacing">
         <div class="food-label" data-label-id="<%= customization._id %>" data-item-id="<%= sandwich._id %>">
           <h3><%= customization.name %></h3>
@@ -80,7 +80,7 @@
               <div class="card-content">
                 <h2 class="card-title"><%= option.name %></h2>
                 <% if (option.display_price) { %>
-                  <p class="card-description" data-card-money="<%= option.price %>" > +<%= option.price %> </p>
+                  <p class="card-description" data-card-money="<%= option.price %>" > +<%= option.show_display_price %> </p>
                 <% } else { %>
                   <p class="card-description" data-card-money="<%= option.price %>" > </p>
                 <% } %>
@@ -88,9 +88,9 @@
               
               <% if (option.extra_options) { %>
                 <div class="buttons">
-                  <button>Less</button>
-                  <button class="active">Regular</button>
-                  <button data-extra-price = "<%= option.extra_price %>" >Extra (+$<%= option.extra_price %>)</button>
+                  <button class="less-button">Less</button>
+                  <button class="regular-button active">Regular</button>
+                  <button class="extra-button" data-extra-price = "<%= option.extra_price %>" >Extra (+$<%= option.extra_price %>)</button>
                 </div>
               <% } %>
             </div>
@@ -133,279 +133,60 @@
  </div>  -->
 
 
+<script src="/js/custom.js"></script>
 <script>
 
-  const selectedIngredients = [];
-  let total_price = 0;
-
-  // Function to update the total price based on selected cards and active buttons
-  
-  function updateTotalPrice() {
-  // Get all selected cards
-  const selectedCards = document.querySelectorAll('.selected');
-
-  // Initialize the total price
-  let totalPrice = 0;
-
-  // Iterate through selected cards and calculate the total price
-  selectedCards.forEach((card) => {
-    const cardDescriptionElement = card.querySelector('p.card-description');
-    const cardPrice = parseFloat(cardDescriptionElement.getAttribute('data-card-money'));
-
-    // Check for buttons within the card
-    const buttons = card.querySelectorAll('.buttons button');
-    buttons.forEach((button) => {
-      if (button.classList.contains('active')) {
-        const extraPrice = parseFloat(button.getAttribute('data-extra-price'));
-        if (!isNaN(extraPrice)) {
-          // Add the extra price to the total price
-          totalPrice += extraPrice;
-        }
-      }
-    });
-
-    // Add the card price to the total price
-    totalPrice += cardPrice;
-  });
-
-  // Get the counter element
-  const counterElement = document.querySelector('.counter');
-
-  // Get the counter value as an integer
-  const counterValue = parseInt(counterElement.textContent);
-
-  // Multiply the total price by the counter value
-  totalPrice *= counterValue;
-
-  // Format the total price to have exactly two decimal places
-  totalPrice = totalPrice.toFixed(2);
-
-  // Convert the formatted total price back to a number
-  totalPrice = parseFloat(totalPrice);
-
-  // Update the Dynamic-Price element with the formatted total price
-  const dynamicPriceElement = document.querySelector(".Dynamic-Price");
-  if (dynamicPriceElement) {
-    // Use toFixed() again to ensure two decimal places with trailing zero
-    dynamicPriceElement.textContent = `$${totalPrice.toFixed(2)}`;
-  }
- }
-
- function updateIngredients() {
-  // Get all selected cards
-  const selectedCards = document.querySelectorAll('.selected');
-
-  // Initialize an array to store selected ingredients
-  const selectedIngredients = [];
-
-  // Iterate through selected cards and collect their ingredient names
-  selectedCards.forEach((card) => {
-    const cardTitleElement = card.querySelector('.card-title');
-    const ingredientName = cardTitleElement.textContent;
-
-    // Check if the ingredient is not already in the list
-    if (!selectedIngredients.includes(ingredientName)) {
-      selectedIngredients.push(ingredientName);
-    }
-  });
-
-  // Update the Dynamic-Ingredient element with the selected ingredients
-  const dynamicIngredientElement = document.querySelector('.Dynamic-Ingredient');
-  if (dynamicIngredientElement) {
-    dynamicIngredientElement.textContent = selectedIngredients.join(', ');
-  }
-}
-
-
-  //Intial Start Up
-  document.addEventListener('DOMContentLoaded', (event) => {
-
-  // Iterate over initially selected cards and update selectedIngredients
-  const initiallySelectedCards = document.querySelectorAll('.selected');
-  /*initiallySelectedCards.forEach((card) => {
-    const optionName = card.querySelector(".card-title").textContent;
-    if (!selectedIngredients.includes(optionName)) {
-      selectedIngredients.push(optionName);
-    }
-
-   });
-
-    // Update the Dynamic-Ingredient element with the selected ingredients if it exists
-    const dynamicIngredient = document.querySelector(".Dynamic-Ingredient");
-    if (dynamicIngredient) {
-      dynamicIngredient.textContent = selectedIngredients.join(", ");
-    } */
-
-    //Update Ingredients
-    updateIngredients();
-    //Update Price
-    updateTotalPrice();
-
-  });
-  
-  
-  const containers = document.querySelectorAll('.container');
-
-  containers.forEach((container) => {
-  const cards = container.querySelectorAll('.card');
-
-
-  cards.forEach((card) => {
-
-    const buttons = card.querySelector(".buttons");
-    const cardContent = card.querySelector(".card-content");
-    const imgClass = card.querySelector(".img-class");
-
-    let isButtonVisible = !!buttons;
-
-
-    card.addEventListener("click", (event) => {
-
-      const cardDescriptionElement = event.currentTarget.querySelector('p.card-description');
-
-      // Now, you can access the price data attribute of the clicked card
-      const cardPrice = cardDescriptionElement.getAttribute('data-card-money');
-      console.log('Card Price:', cardPrice);
-
-      if (isButtonVisible) {
-        // Toggle the visibility of buttons, imgClass, and hide other card content
-        buttons.style.display = buttons.style.display === "none" || buttons.style.display === "" ? "flex" : "none";
-        imgClass.style.display = buttons.style.display === "none" ? "block" : "none";
-        cardContent.style.display = buttons.style.display === "none" ? "block" : "none";
-      }
-
+  document.addEventListener('DOMContentLoaded',  function() {
+    // Attach a click event listener to the "Add To Cart" button
+    document.querySelector('.add_to_cart').addEventListener('click', async function() {
+      // Collect selected items with button state
+      const selectedItems = [];
       
+      // Loop through all the cards with the 'selected' class
+      const selectedCards = document.querySelectorAll('.card.selected');
+      selectedCards.forEach(function(card) {
+        const cardId = card.getAttribute('data-card-id');
+        const itemId = card.getAttribute('data-item-id');
 
-      // Check if the card is already selected
-      const isSelected = card.classList.contains("selected");
-
-      // Check if the container allows multi-card selection
-      const isMultiCardContainer = container.dataset.multiCard === "true";
-
-      // If it's a multi-card container or the card is not already selected, toggle the "selected" class
-      if (isMultiCardContainer || !isSelected) {
-        card.classList.toggle("selected");
-      }
-
-      // If it's a mult-card and is selected and has buttons when clicked it will turn off the button container and show regualr card content 
-      if(isMultiCardContainer && isSelected && buttons){
-        console.log("Hey Man")
-        buttons.style.display = "none";
-        imgClass.style.display = "block";
-        cardContent.style.display = "block";
-      }
-
-      // Remove the "selected" class from all other cards in the same container if it's not a multi-card container
-      if (!isMultiCardContainer) {
-        cards.forEach((containerCard) => {
-          if (containerCard !== card) {
-            containerCard.classList.remove("selected");
-            const containerButtons = containerCard.querySelector(".buttons");
-            const containerImgClass = containerCard.querySelector(".img-class");
-            const containerCardContent = containerCard.querySelector(".card-content");
-            if (containerButtons) {
-              containerButtons.style.display = "none";
-              containerImgClass.style.display = "block";
-              containerCardContent.style.display = "block";
-            }
-
-           /* const other_optionName = containerCard.querySelector(".card-title").textContent;
-            const this_optionName = card.querySelector(".card-title").textContent;
-
-            const ingredientIndex = selectedIngredients.indexOf(other_optionName);
-            console.log(other_optionName + ": " + ingredientIndex);
-            selectedIngredients.splice(ingredientIndex, 1);
-            selectedIngredients.splice(ingredientIndex, 0, this_optionName); */
-
-          }
-
-        });
-      }
-
-
-      // Ingredient Array
-      /*
-      const optionName = card.querySelector(".card-title").textContent;
-      const ingredientIndex = selectedIngredients.indexOf(optionName);
-
-      if (isSelected && isMultiCardContainer ) {
-        if (ingredientIndex !== -1) {
-          selectedIngredients.splice(ingredientIndex, 1);
-        }
-      } else {
-        if (ingredientIndex === -1) {
-          selectedIngredients.push(optionName);
-        }
-      } 
-
-      // Update the Dynamic-Ingredient element with the selected ingredients if it exists
-      const dynamicIngredient = document.querySelector(".Dynamic-Ingredient");
-      if (dynamicIngredient) {
-        dynamicIngredient.textContent = selectedIngredients.join(", ");
-      } */
-
-      //Update Price
-      updateIngredients();
-      updateTotalPrice();
-      console.log(selectedIngredients);
-
-      
-
-    });
-
-  
-
-    const options = card.querySelectorAll(".buttons button");
-
-    options.forEach((button) => {
-      button.addEventListener("click", (event) => {
-        event.stopPropagation();
-
-        // Remove the "active" class from all buttons within the same card
-        options.forEach((btn) => btn.classList.remove("active"));
-
-        // Add the "active" class to the clicked button
-        button.classList.add("active");
-
-        // Hide buttons, show imgClass, and cardContent
-        buttons.style.display = "none";
-        imgClass.style.display = "block";
-        cardContent.style.display = "block";
+        // Check if the "Less" and "Extra" buttons exist in the card
+        const lessButton = card.querySelector('.less-button');
+        const extraButton = card.querySelector('.extra-button');
         
-        //Update Price
-        updateTotalPrice();
+        // Check if the buttons exist before accessing their classList
+        const lessButtonActive = lessButton ? lessButton.classList.contains('active') : false;
+        const extraButtonActive = extraButton ? extraButton.classList.contains('active') : false;
+
+        // Get the counter value
+        const counterValue = parseInt(document.querySelector('.counter').textContent);
+        
+        selectedItems.push({ cardId, itemId, counterValue, lessButtonActive, extraButtonActive,});
       });
-    });
 
-  });
- });
+      console.log(selectedItems);
+
+      try {
+        const res = await fetch('/sandwichIng_val', {
+        method: 'POST',
+        body: JSON.stringify({ selectedItems }),
+        headers: { 'Content-Type': 'application/json' }
+       });
+         
+       const data = await res.json();
+       if(data.valid){
+        console.log("Helllo")
+        console.log(data)
+       }
 
 
- const minusButton = document.querySelector('.minus-btn');
- const plusButton = document.querySelector('.plus-btn');
- const counter = document.querySelector('.counter');
-
-  minusButton.addEventListener('click', function () {
-    let count = parseInt(counter.textContent);
-    if (count > 1) {
-      count--;
-      counter.textContent = count;
-      }else{
-        minusButton.style.color = "grey";
+      } catch (error) {
+         console.log("This Is the Error..." + error)
       }
-    //Update Price
-    updateTotalPrice();
-  });
 
-  plusButton.addEventListener('click', function () {
-    let count = parseInt(counter.textContent);
-    minusButton.style.color = "#059511";
-    count++;
-    counter.textContent = count;
-    //Update Price
-    updateTotalPrice();
-  });
 
+      
+    });
+  });
+    
 
 </script>
 
