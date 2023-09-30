@@ -22,7 +22,15 @@
     <div class="container"> 
       <ul class="cartandhome">
         <li class="ch"><a href="/"><i class="fa-solid fa-house fa-lg"></i></a></li>
-        <li class="ch my-cart"><i class="fa-solid fa-cart-shopping fa-lg widget"></i>Your Cart <span class="cart-size"></span></li>
+        <li class="ch my-cart">
+          <i class="fa-solid fa-cart-shopping fa-lg widget"></i>
+          Your Cart
+          <% if (cartSize > 0) { %>
+            <span class="cart-size"> <%= cartSize %> </span>
+          <% } else { %>
+            <span class="cart-size" style="display: none;"> </span>
+          <% } %>
+        </li>
       </ul>
     </div>
   </div>

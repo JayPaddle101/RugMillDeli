@@ -20,8 +20,12 @@
       <div class="first-wrapper"> 
         
         <ul class="signout">
-          <li>Sign Up</li>
-          <li>Log In</li>
+          <% if (user) { %>
+            <a href="/logout" class="small_log_out"><li>Log Out</li></a>
+          <% } else { %>
+            <a href="/signup" class="small_log_out"><li>Sign Up</li></a>
+            <a href="/login"><li>Log In</li></a>
+          <% } %>
         </ul>
         <img src="img/logo.png.png" alt="logo"  class="logo">
         <div class="header">Rug Mill Deli!</div>
@@ -41,11 +45,21 @@
            <li class="elements"><a href="/login"> Log In</a></li> 
            <li class="elements"><a href="/signup"><i class="fa-solid fa-address-card widget"></i> Sign Up</a></li>
            <% } %>
-        </ul>
+        </ul> 
       </div>
 
       <div class="third-wrapper">
-        <button class="button-74"><i class="fa-solid fa-cart-shopping widget"></i> Your Cart <span class="cart-size"></span></button> 
+        <% if (typeof cartSize !== 'undefined' && cartSize > 0) { %>
+          <button class="button-74">
+            <i class="fa-solid fa-cart-shopping widget"></i>
+            Your Cart <span class="cart-size" > (<%= cartSize %>) </span>
+          </button>
+        <% } else { %>
+          <button class="button-74">
+            <i class="fa-solid fa-cart-shopping widget"></i>
+            Your Cart <span class="cart-size"> </span>
+          </button>
+        <% } %>
       </div>
      </div>
     </div>
@@ -105,7 +119,46 @@
     </div>
   </main>
 
+<script>
 
-  
+document.addEventListener('DOMContentLoaded', function () {
+  const cartButton = document.querySelector('.button-74');
+
+  if (cartButton) {
+    cartButton.addEventListener('click', async function () {
+      console.log('Cart Button clicked!');
+      try {
+        const res = await fetch('/toCart', {
+          method: 'GET',
+        });
+
+        if (res.status === 204) {
+          // Handle the case when there's nothing in the cart (status 204)
+          alert('Nothing in the cart.');
+        } else {
+          const data = await res.json();
+          console.log(data);
+          if (data.valid) {
+            window.location.href = `/getCart/${data.cartID}`;
+          } else {
+            alert(data.message);
+          }
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('User Cart is not findable');
+      }
+    });
+  }
+});
+
+
+
+
+
+
+</script>
+
+
 </body>
 </html>

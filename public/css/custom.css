@@ -78,6 +78,11 @@ svg {
   cursor: pointer;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 
 /*  -----------------------------------------------UNIVERSAL END--------------------------------------------- */
 
@@ -414,6 +419,35 @@ svg {
   .cart_button{
     width: 100%;
   }
+}
+
+/* Media query for screens with a width of 652px or lower */
+@media (max-width: 466px) {
+  
+  .counter{
+    color: #298e46;
+    padding: 10px;
+    font-size: medium;
+  }
+  
+  .count-btn{
+    appearance: none;
+    border: none;
+    background: none;
+    outline: none;
+    cursor: pointer;
+    font-size: medium;
+    color: #059511;
+  }
+
+  .add_to_cart{
+   font-size: 15px;
+   font-weight: 700;
+   line-height: 40px;
+   padding: 0px 40px;
+  }
+
+
 }
 
 

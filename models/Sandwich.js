@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 
 const optionSchema = new mongoose.Schema({
 
+    _id: mongoose.Schema.Types.ObjectId, // Explicitly define _id
+
     name: {
         type: String,
         required: true,
@@ -101,12 +103,10 @@ const sandwichSchema = new mongoose.Schema({
 
 
 sandwichSchema.statics.validateItems = async function (selectedItems) {
-
     try {
 
       for (const selectedItem of selectedItems) {
         const { cardId , itemId } = selectedItem;
-  
         // Check if cardId and itemId are valid mongoose ObjectId
         if (!mongoose.Types.ObjectId.isValid(cardId) || !mongoose.Types.ObjectId.isValid(itemId)) {
           return { valid: false, message: 'Invalid ID in selected items' };
@@ -115,8 +115,7 @@ sandwichSchema.statics.validateItems = async function (selectedItems) {
         // Perform any additional validation or processing here
         // For example, you can fetch the corresponding Sandwich document
         const sandwich = await this.findById(itemId);
-        //const ing = await this.findById(cardId);
-        //console.log(ing);
+      
   
         if (!sandwich) {
           return { valid: false, message: 'Sandwich not found for itemId ' + itemId };
@@ -124,7 +123,11 @@ sandwichSchema.statics.validateItems = async function (selectedItems) {
       }
         
       // If all selected items are valid
-      return { valid: true, message: 'Selected items are valid' };
+      const id = selectedItems[0].itemId;
+      const value = selectedItems[0].counterValue;
+      const sandwich = await this.findById(id);
+      
+      return { valid: true, message: 'Selected items are valid', sandwich, value };
 
     } catch (error) {
       console.error('Error:', error);

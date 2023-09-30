@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart!</title>
+    <title> Rug Mill Deli </title>
+    <link rel="stylesheet" href="/css/cart.css">
+    <script src="https://kit.fontawesome.com/093b934dd0.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aoboshi+One&family=Caveat:wght@700&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <div class="container">
+        <div class="two-collums">
+            <div class="bag-summary">
+
+             <h1 class="bag-header">Your Bag</h1> <i class="fa-solid fa-bag-shopping"></i>
+             <div class="shopping-button"><a href="/"><button class="shop" role="button">Keep On Shopping</button></a></div>
+             <ul id="order-list">
+                
+                <% for (let i = 0; i < cart.items.length; i++) { %>
+                    <div class="Sandwich_Data" data-sandwich-id="<%= cart.items[i].sandwich %>" data-cart-id="<%= cart._id %>">
+                      <% const item = cart.items[i]; %>
+                      <% const userSandwich = userSandwiches[i]; %>
+                      
+                      <!-- Display userSandwich details for each item -->
+                      <h4><%= userSandwich.name %></h4>
+                      <span class="price" data-item-price="<%= userSandwich.actual_price %>"> $<%= userSandwich.actual_price %> </span>
+                      <h6><%= userSandwich.ing_list %></h6>
+                  
+                      <!-- Counter for quantity -->
+                      <span class="counter-box">
+                        <button class="minus-btn count-btn">-</button>
+                        <span class="counter"><%= userSandwich.quantity %></span>
+                        <button class="plus-btn count-btn">+</button>
+                      </span>
+                  
+                      <!-- Remove button -->
+                      <span class="remove">Remove</span>
+                    </div>
+                  <% } %>
+                  
+                <div class="empty"> Cart Is Empty... <i class="fa-solid fa-eraser fa-xl"></i></div>
+             </ul>
+          </div>
+
+           <div class="price-summary">
+            <div class="price-header">Order Summary</div>
+            <div class="spacing"></div>
+
+            <span class="total total_price">Your Total</span> <span class="dynamic-total dyn"></span>
+            <div class="spacing"></div>
+
+            <span class="total total_tax">Tax</span> <span class="dynamic-tax dyn"></span>
+            <div class="spacing"></div>
+
+            <span class="total total_size">Sandwiches Count</span> <span class="dynamic-size dyn"> <%= cart.quantity %> </span>
+            <div class="spacing"></div>
+
+            <span class="total final_price">You Pay <i class="fa-solid fa-circle-plus"></i></span> <span class="dynamic-final-price dyn"></span>
+            <div class="spacing"></div>
+
+            <button class="button-5" role="button" data-cart-id="<%= cart._id %>">Submit Order</button>
+
+          </div>  
+
+      </div>
+  </div>
+
+
+
+ <script src="/js/cartjs.js"></script>
+ <script>
+
+ document.addEventListener('DOMContentLoaded', function () {
+
+  //SUBMIT ORDER SECTION
+  const submitOrderButton = document.querySelector('.button-5');
+  const cartId = submitOrderButton.getAttribute('data-cart-id');
+
+  
+  submitOrderButton.addEventListener('click', async () => {
+    console.log("SUBMIT ORDER" + cartId)
+
+    try {
+      // Make a POST request to your server to initiate payment
+      const response = await fetch('/processPayment', {
+      method: 'POST',
+      headers: {
+       'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ cartId }),
+      });
+
+      const data = await response.json();
+
+      if (data.ok) {
+        console.log("Payment Fetch Confirmed")
+        console.log(data);
+        window.location = data.url
+      }
+
+       
+    } catch (error) {
+      console.error('Error:', error);
+    }
+
+  })
+
+
+
+  //MODIFICATION SECTION
+  const sandwichDataElements = document.querySelectorAll('.Sandwich_Data');
+  
+  
+  sandwichDataElements.forEach((element) => {
+    const plusButton = element.querySelector('.plus-btn');
+    const minusButton = element.querySelector('.minus-btn');
+    const sandwichId = element.getAttribute('data-sandwich-id');
+    const cartId = element.getAttribute('data-cart-id');
+    const removeButtons = element.querySelector('.remove');
+
+    removeButtons.addEventListener('click', () => {
+      removeSandwich(cartId, sandwichId);
+    }); 
+ 
+    plusButton.addEventListener('click', () => {
+      updateQuantity(cartId, sandwichId, 'increase');
+    });
+
+    minusButton.addEventListener('click', () => {
+      updateQuantity(cartId, sandwichId, 'decrease');
+    });
+  });
+
+  async function updateQuantity(cartId, sandwichId, action) {
+      try {
+        // Make a fetch request to your server to update the quantity
+        const response = await fetch('/updateQuantity', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ cartId, sandwichId, action }),
+        });
+
+        if (response.ok) {
+          // Refresh the page to see the updated data
+          window.location.reload();
+        } else {
+          console.error('Failed to update quantity');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+  }
+
+
+  async function removeSandwich(cartId, sandwichId) {
+      try {
+        // Make a fetch request to your server to update the quantity
+        const response = await fetch('/deleteUserSandwich', {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ cartId, sandwichId}),
+        });
+
+        if (response.ok) {
+          // Refresh the page to see the updated data
+          window.location.reload();
+        } else {
+          console.error('Failed to delete Sandwich');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+  }
+
+ });
+ 
+
+</script>
+</body>
+</html>

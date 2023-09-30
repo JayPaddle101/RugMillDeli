@@ -318,7 +318,7 @@ a {
     cursor: pointer;
   }
 
-  .signout li:first-child {
+  .small_log_out{
     /* Your styles for the first item here */
     border-radius: 10px;
     background-color: #b9770b;
@@ -326,7 +326,18 @@ a {
     font-weight: bold;
     
     /* Add any other styles you want */
-}
+  }
+
+  .signout li:second-child {
+    /* Your styles for the first item here */
+    border-radius: 10px;
+    background-color: none;
+    color: black;
+    font-weight: bold;
+    
+    /* Add any other styles you want */
+  }
+   
  
   .primary-header .container .nav-wrapper{
     display: flex;

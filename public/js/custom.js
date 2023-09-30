@@ -229,3 +229,33 @@ plusButton.addEventListener('click', function () {
     //Update Price
     updateTotalPrice();
 }); 
+
+const cartIcon = document.querySelector('.fa-cart-shopping');
+const cartSizeSpan = document.querySelector('.cart-size');
+
+  if (cartIcon || cartSizeSpan) {
+     cartIcon.addEventListener('click', async function () {
+     console.log('Cart Icon clicked!');
+       try {
+        const res = await fetch('/toCart', {
+          method: 'GET',
+        });
+
+        if (res.status === 204) {
+          // Handle the case when there's nothing in the cart (status 204)
+          alert('Nothing in the cart.');
+        } else {
+          const data = await res.json();
+          console.log(data);
+          if (data.valid) {
+            window.location.href = `/getCart/${data.cartID}`;
+          } else {
+            alert(data.message);
+          }
+        }
+       } catch (error) {
+        console.error('Error:', error);
+        alert('User Cart is not findable');
+       }
+     });
+   }  
