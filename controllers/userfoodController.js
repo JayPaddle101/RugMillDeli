@@ -2,6 +2,8 @@ const Sandwich = require("../models/Sandwich");
 const UserSandwich = require("../models/userSandwich");
 const Cart = require("../models/Cart");
 const jwt = require('jsonwebtoken');
+const jwtSecret = process.env.JWT_SECRET;
+
 
 //validate UserSandwich
 module.exports.valIngSandwich = async(req, res) =>{
@@ -19,7 +21,7 @@ module.exports.valIngSandwich = async(req, res) =>{
       const token = req.cookies.jwt;
       let UserID = null;
 
-      jwt.verify(token, 'jaypaddle', (err, decodedToken) =>{
+      jwt.verify(token, jwtSecret , (err, decodedToken) =>{
         if (err) {
           console.log(err.message);
           res.redirect('/login');

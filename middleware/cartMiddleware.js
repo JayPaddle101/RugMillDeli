@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken');
 const Cart = require("../models/Cart");
+const jwtSecret = process.env.JWT_SECRET;
+
 
 // Define a middleware function to check the user's cart
 const checkCart = async (req, res, next) => {
@@ -7,7 +9,7 @@ const checkCart = async (req, res, next) => {
     const token = req.cookies.jwt;
     let UserID = null;
 
-    jwt.verify(token, 'jaypaddle', (err, decodedToken) =>{
+    jwt.verify(token, jwtSecret , (err, decodedToken) =>{
        if (err) {
           //console.log(err.message);
           //res.redirect('/');

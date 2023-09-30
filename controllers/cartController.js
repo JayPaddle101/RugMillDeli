@@ -1,7 +1,8 @@
 const UserSandwich = require("../models/userSandwich");
 const jwt = require('jsonwebtoken');
 const Cart = require('../models/Cart');
-const stripe = require('stripe')('sk_test_51NvlibLnsq0h6sVy4uw0cf0TEBeC4mVhsoFuTQvWr68eAHDgLT34wNx1JayyTifwPIBM8DcMS1e0or0lHhFzSJja001vq5corm');
+const stripe = require('stripe')(process.env.STRIPE_API_KEY)
+const jwtSecret = process.env.JWT_SECRET;
 
 
 module.exports.addToCart = async(req, res) =>{
@@ -198,7 +199,7 @@ module.exports.toCart = async(req, res) => {
   const token = req.cookies.jwt;
   let UserID = null;
 
-  jwt.verify(token, 'jaypaddle', (err, decodedToken) =>{
+  jwt.verify(token, jwtSecret , (err, decodedToken) =>{
     if (err) {
       console.log(err.message);
       res.redirect('/login');

@@ -1,5 +1,7 @@
 const User = require("../models/User");
 const jwt = require('jsonwebtoken');
+const jwtSecret = process.env.JWT_SECRET;
+
 
 //Error Handling 
 const handleErrors = (err) =>{
@@ -41,7 +43,7 @@ const handleErrors = (err) =>{
 //Create JWT Token
 const maxAge = 3 * 24 * 60 * 60;
 const createToken = (id) =>{
-  return jwt.sign({ id }, 'jaypaddle', {
+  return jwt.sign({ id }, jwtSecret , {
     expiresIn: maxAge   
   })
 }

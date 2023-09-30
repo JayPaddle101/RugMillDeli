@@ -3,6 +3,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+require('dotenv').config(); // Load environment variables from .env
+
 
 //Routes
 const authRoutes = require('./routes/authRoutes');
@@ -19,11 +21,10 @@ const clearCarts = require('./middleware/clearCart');
 
 //Configure App
 const app = express();
-const stripe = require('stripe')('sk_test_51NvlibLnsq0h6sVy4uw0cf0TEBeC4mVhsoFuTQvWr68eAHDgLT34wNx1JayyTifwPIBM8DcMS1e0or0lHhFzSJja001vq5corm');
-
+const stripe = require('stripe')(process.env.STRIPE_API_KEY)
 
 // database connection
-const dbURI = 'mongodb+srv://jrp329:Awesome101@rgm.bciueqx.mongodb.net/?retryWrites=true&w=majority';
+const dbURI = process.env.DB_URI;
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true,})
 .then((result) => app.listen(3000), console.log("Listening To Port 3000"))
 .catch((err) => console.log(err));
