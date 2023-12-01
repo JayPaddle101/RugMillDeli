@@ -21,13 +21,13 @@
     <div class="container">
         <div class="wrapper">
 
-            <% display_breakfast.forEach(sandwich => { %>
+            <% display_food.forEach(sandwich => { %>
                 <div class="card" data-item-id="<%= sandwich._id %>" onclick="handleCardClick(this)">
                     <div class="circle">
                         <img src="img/<%= sandwich.image %>" alt="Image">
                     </div>
                     <div class="text">
-                        <p><%= sandwich.name %> Sandwich</p>   
+                        <p><%= sandwich.name %></p>   
                     </div>
                 </div>
             <% }); %>

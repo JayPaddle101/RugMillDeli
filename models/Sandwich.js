@@ -24,7 +24,7 @@ const optionSchema = new mongoose.Schema({
     },
 
     show_display_price:{
-        type: Number
+        type: Number,
     },
 
     extra_options: {

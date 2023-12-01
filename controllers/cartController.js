@@ -136,8 +136,12 @@ module.exports.processPayment = async(req, res) => {
     // Add the tax line item to the lineItems array
     lineItems.push(taxLineItem);
 
-    const cancelUrl = `http://localhost:3000/getCart/${cartId}`;
-    const successUrl = `http://localhost:3000/confirmedPayment/${cartId}`;
+   /*const cancelUrl = `http://localhost:3000/getCart/${cartId}`;
+    const successUrl = `http://localhost:3000/confirmedPayment/${cartId}`; 
+   */
+
+    const cancelUrl = `https://rugmilldeli.onrender.com/getCart/${cartId}`;
+    const successUrl = `https://rugmilldeli.onrender.com/confirmedPayment/${cartId}`; 
 
 
 

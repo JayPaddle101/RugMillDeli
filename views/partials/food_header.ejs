@@ -8,11 +8,36 @@
                     <h3><i class="fa-solid fa-egg widget"></i>Breakfast</h3>
                 </button>
             </li>
-             <li class="nav-items"><button class="button-47"><h3><i class="fa-solid fa-bread-slice widget"></i>Cold Subs</h3></button></li>
-             <li class="nav-items"><button class="button-47"><h3><i class="fa-solid fa-fire-flame-curved widget"></i>Hot Subs</h3></button></li>
-             <li class="nav-items"><button class="button-47"><h3><i class="fa-solid fa-plate-wheat widget"></i>Salads & Wraps</h3></button></li>
-             <li class="nav-items"><button class="button-47"><h3><i class="fa-solid fa-burger widget"></i>Hamburger</h3></button></li>
-             <li class="nav-items"><button class="button-47"><h3><i class="fa-solid fa-drumstick-bite widget"></i>Chicken</h3></button></li>
+
+           <li class="nav-items">
+             <button class="button-47 <%= selectedFood === 'Coldsub' ? 'selected-food' : '' %>">
+               <h3><i class="fa-solid fa-bread-slice widget"></i>Cold Subs</h3>
+             </button>
+           </li>
+
+            <li class="nav-items">
+              <button class="button-47 <%= selectedFood === 'Hotsub' ? 'selected-food' : '' %>">
+                <h3><i class="fa-solid fa-fire-flame-curved widget"></i>Hot Subs</h3>
+              </button>
+            </li>
+             
+            <li class="nav-items">
+              <button class="button-47 <%= selectedFood === 'Salad&Wrap' ? 'selected-food' : '' %>">
+                <h3><i class="fa-solid fa-plate-wheat widget"></i>Salads & Wraps</h3>
+              </button>
+            </li>
+
+            <li class="nav-items">
+               <button class="button-47 <%= selectedFood === 'Hamburger' ? 'selected-food' : '' %>">
+                <h3><i class="fa-solid fa-burger widget"></i>Hamburger</h3>
+              </button>
+            </li>
+
+            <li class="nav-items">
+              <button class="button-47 <%= selectedFood === 'Chicken' ? 'selected-food' : '' %>">
+                <h3><i class="fa-solid fa-drumstick-bite widget"></i>Chicken</h3>
+              </button>
+            </li>  
          </ul>
       </div>
    </div>

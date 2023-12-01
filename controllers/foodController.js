@@ -30,10 +30,80 @@ module.exports.breakfast_get = async (req, res) =>{
     const selectedFood = "Breakfast"; // Use the same variable name here
    
     try {
-     const display_breakfast = await Sandwich.getDisplaySandwichs(selectedFood); //Getting array of Sandwichs from db
+     const display_food = await Sandwich.getDisplaySandwichs(selectedFood); //Getting array of Sandwichs from db
      //console.log('Displayed BreakFast Sandwiches:');
      //console.log(display_breakfast);
-     res.render("food", { selectedFood, display_breakfast }); // Pass Info
+     res.render("food", { selectedFood, display_food }); // Pass Info
+        
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+module.exports.hamburger_get = async (req, res) =>{
+    const selectedFood = "Hamburger"; // Use the same variable name here
+   
+    try {
+     const display_food = await Sandwich.getDisplaySandwichs(selectedFood); //Getting array of Sandwichs from db
+     //console.log('Displayed BreakFast Sandwiches:');
+     //console.log(display_breakfast);
+     res.render("food", { selectedFood, display_food }); // Pass Info
+        
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+module.exports.chicken_get = async (req, res) =>{
+    const selectedFood = "Chicken"; // Use the same variable name here
+   
+    try {
+     const display_food = await Sandwich.getDisplaySandwichs(selectedFood); //Getting array of Sandwichs from db
+     //console.log('Displayed BreakFast Sandwiches:');
+     //console.log(display_breakfast);
+     res.render("food", { selectedFood, display_food }); // Pass Info
+        
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+module.exports.coldsub_get = async (req, res) =>{
+    const selectedFood = "Coldsub"; // Use the same variable name here
+   
+    try {
+     const display_food = await Sandwich.getDisplaySandwichs(selectedFood); //Getting array of Sandwichs from db
+     //console.log('Displayed BreakFast Sandwiches:');
+     //console.log(display_breakfast);
+     res.render("food", { selectedFood, display_food }); // Pass Info
+        
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+module.exports.hotsub_get = async (req, res) =>{
+    const selectedFood = "Hotsub"; // Use the same variable name here
+   
+    try {
+     const display_food = await Sandwich.getDisplaySandwichs(selectedFood); //Getting array of Sandwichs from db
+     //console.log('Displayed BreakFast Sandwiches:');
+     //console.log(display_breakfast);
+     res.render("food", { selectedFood, display_food }); // Pass Info
+        
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+module.exports.salad_wrap_get = async (req, res) =>{
+    const selectedFood = "Salad&Wrap"; // Use the same variable name here
+   
+    try {
+     const display_food = await Sandwich.getDisplaySandwichs(selectedFood); //Getting array of Sandwichs from db
+     //console.log('Displayed BreakFast Sandwiches:');
+     //console.log(display_breakfast);
+     res.render("food", { selectedFood, display_food }); // Pass Info
         
     } catch (error) {
         console.log(error);
