@@ -22,12 +22,12 @@ const clearCarts = require('./middleware/clearCart');
 //Configure App
 const app = express();
 const stripe = require('stripe')(process.env.STRIPE_API_KEY)
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 
 // database connection
 const dbURI = process.env.DB_URI;
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true,})
-.then((result) => app.listen(PORT), console.log("Listening To Port 3000"))
+.then((result) => app.listen(PORT), console.log(`Listening on port ${PORT}`))
 .catch((err) => console.log(err));
 
 
